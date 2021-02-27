@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import History from './components/History/History';
 import Header from './components/Header/Header';
+import ChatInput from './components/ChatInput/ChatInput';
 import "./App.css";
 import { connect, sendMsg } from "./api";
 
@@ -22,8 +23,11 @@ class App extends Component {
     });
   }
 
-  send() {
-    sendMsg("hello");
+  send(event) {
+    if(event.keyCode === 13) {
+      sendMsg(event.target.value);
+      event.target.value = "";
+    }
   }
 
   render() {
@@ -31,7 +35,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <History History={this.state.History} />
-        <button onClick={this.send}>Send Message</button>
+        <ChatInput send={this.send} />
       </div>
     );
   }
