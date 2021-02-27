@@ -9,10 +9,11 @@ class History extends Component {
 
         return (
             <div className="History">
+                <h2>History</h2>
                 {messages}
             </div>
         );
     }
 }
 
-export default History;
+export default History; 

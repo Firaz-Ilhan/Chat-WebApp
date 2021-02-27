@@ -1,12 +1,25 @@
 import React, { Component } from "react";
+import History from './components/History/History';
+import Header from './components/Header/Header';
 import "./App.css";
 import { connect, sendMsg } from "./api";
-import Header from './components/Header/Header';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    connect();
+    this.state = {
+      History: []
+    }
+  }
+
+  componentDidMount() {
+    connect((msg) => {
+      console.log("New Message")
+      this.setState(prevState => ({
+        History: [...prevState.History, msg]
+      }))
+      console.log(this.state);
+    });
   }
 
   send() {
@@ -17,7 +30,8 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <button onClick={this.send}>Hit</button>
+        <History History={this.state.History} />
+        <button onClick={this.send}>Send Message</button>
       </div>
     );
   }
