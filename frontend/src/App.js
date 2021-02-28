@@ -23,8 +23,8 @@ class App extends Component {
     });
   }
 
-  send(event) {
-    if(event.keyCode === 13) {
+  sendMessage(event) {
+    if (event.keyCode === 13 && event.target.value !== "") {
       sendMsg(event.target.value);
       event.target.value = "";
     }
@@ -35,7 +35,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <History History={this.state.History} />
-        <ChatInput send={this.send} />
+        <ChatInput send={this.sendMessage} />
       </div>
     );
   }
