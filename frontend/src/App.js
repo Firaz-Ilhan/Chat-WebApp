@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import History from './components/History/History';
+import ChatFeed from './components/ChatFeed/ChatFeed';
 import Header from './components/Header/Header';
 import ChatInput from './components/ChatInput/ChatInput';
 import "./App.css";
@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      History: []
+      chatFeed: []
     }
   }
 
@@ -17,7 +17,7 @@ class App extends Component {
     connect((msg) => {
       console.log("New Message")
       this.setState(prevState => ({
-        History: [...prevState.History, msg]
+        chatFeed: [...prevState.chatFeed, msg]
       }))
       console.log(this.state);
     });
@@ -34,7 +34,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <History History={this.state.History} />
+        <ChatFeed ChatFeed={this.state.chatFeed} />
         <ChatInput send={this.sendMessage} />
       </div>
     );
